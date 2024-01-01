@@ -1,8 +1,8 @@
 import React from 'react';
-import ExpenseItem from "./components/Expenseitem.js";  // Ensure correct capitalization
+import ExpenseItem from "./components/Expenses/Expenseitem";  
 
 
-function App() {
+const App = () => {
   const expenses = [
     { id:"e1", title:"food" , amount:1000, date:new Date(2023,0,1) , location:'ap' },
     { id:"e2", title:"cooldrinks" , amount:300, date:new Date(2023,1,2) , location:'tn' },
