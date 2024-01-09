@@ -1,14 +1,34 @@
-import './Expenseitem.css';
+// ExpenseItem.js
 
-function ExpenseItem() {
+import React, { useState } from 'react';
+
+
+import ExpenseDate from './ExpenseDate';
+import ExpenseDetails from './ExpenseDetails';
+import './Expenseitem.css';
+import Card from '../UI/Card';
+
+
+const ExpenseItem = (props) => {
+  const [title, setTitle] = useState(props.title);
+  const [amount, setAmount] = useState(props.amount);
+
+  const clickHandler = () => {
+    setTitle('New title');
+  };
+
+  const changeAmountHandler = () => {
+    setAmount(100);
+  };
+
   return (
-    <div className="expense-item">
-      <div>Date </div>
-      <div className="expense-item__description">
-        <h2>Title</h2>
-        <div className= "expense-item__price">Amount</div>
-      </div>
-    </div>
+    <Card className="expense-item">
+      <ExpenseDate date={props.date} />
+      <ExpenseDetails amount={amount} location={props.location} title={title} />
+      <button onClick={clickHandler}> Change title </button>
+      <button onClick={changeAmountHandler}>Change Amount</button>
+      <button>Delete Expense</button>
+    </Card>
   );
 }
 
