@@ -1,31 +1,29 @@
-import React from 'react';
+// App.js
 
+import React, { useState } from 'react';
 import NewExpense from './components/NewExpenses/NewExpense';
-import ExpenseItem from "./components/Expenses/Expenseitem";  
-
+import Expense from './components/Expenses/Expense';
 
 const App = () => {
-  const expenses = [
-    { id:"e1", title:"food" , amount:1000, date:new Date(2023,0,1) , location:'ap' },
-    { id:"e2", title:"cooldrinks" , amount:300, date:new Date(2023,1,2) , location:'tn' },
-    { id:"e3", title:"petrol" , amount:3000, date:new Date(2023,2,3) , location:'ka' },
-    { id:"e4", title:"toll" , amount:3900, date:new Date(2023,3,4) , location:'ts' },
+  const DUMMY_EXPENSES = [
+    { id: "e1", title: "food", amount: 1000, date: new Date(2020, 0, 1), location: 'ap' },
+    { id: "e2", title: "cooldrinks", amount: 300, date: new Date(2020, 1, 2), location: 'tn' },
+    { id: "e3", title: "petrol", amount: 3000, date: new Date(2020, 2, 3), location: 'ka' },
+    { id: "e4", title: "toll", amount: 3900, date: new Date(2020, 3, 4), location: 'ts' },
   ];
+
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => {
+      return [expense, ...prevExpenses];
+    });
+  };
 
   return (
     <div>
-      <NewExpense/>
-      <div>
-        {expenses.map(expense => (
-          <ExpenseItem
-            key={expense.id}  
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-            location={expense.location}
-          />
-        ))}
-      </div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expense expenses={expenses} />
     </div>
   );
 }
